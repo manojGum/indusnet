@@ -62,7 +62,7 @@ router.post("/",Authenticate, async (req,res,next)=>{
                 "message":"successfully Login"
             }
             res.cookie("jwttoken","")
-            return res.status(200).send({user,trackId,statusCode:200,timestamp,})
+            return res.status(200).send({user,statusCode:200,timestamp,})
         }
     }catch(err){
         return res.status(500).send(err.message)

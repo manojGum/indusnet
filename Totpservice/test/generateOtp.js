@@ -43,31 +43,50 @@ describe('POST /api/v16.17.0/otp/generateOTP',()=>{
     });
 
 it("It should POST all the requirement",(done)=>{
+
         chai.request(server)
-        const task={
+        // const task={
+        //     userName:"manoj kumar",
+        //     email:"manojgum@gmail.com",
+        // }
+        // const  trackId=Math.floor(new Date())
+        // const timestamp=new Date()
+        .post("/api/v16.17.0/otp/generateOTP")
+        .type('form')
+        .send({
             userName:"manoj kumar",
             email:"manojgum@gmail.com",
-        }
-        const  trackId=Math.floor(new Date())
-        const timestamp=new Date()
-        .post("/api/v16.17.0/otp/generateOTP")
-        .send(task)
+        })
         .end((err,response)=>{
             response.should.have.status(200)
-            response.body.should.be.a(`String`)
-            response.body.should.have.property('timestamp').eq(timestamp);
-            response.body.should.have.property('TraceID').eq(trackId);
-            response.body.should.have.property('Email').qu(email);
+            response.body.should.be.a(`object`)
+            response.body.should.have.property('Email').eq(email);
             response.body.should.have.property('token');
             response.body.should.have.property('success').eq(true);
             response.body.should.have.property('message');
             response.body.should.have.property('otp');
             done()
-        })
-    })
+        });
+    });
 
 
-})
+    // it("It should NOT POST a new task without the email propertiy",(done)=>{
+    //     chai.request(server)
+    //     const task={
+    //         userName:"manoj kumar"
+    //     }
+    //     .post("/api/v16.17.0/otp/generateOTP")
+    //     .end((err,response)=>{
+    //         response.should.have.status(401)
+    //         response.body.should.be.eq("Email not provided")
+    //         done()
+    //     });
+    // });
+
+
+
+
+});
 
 
 
@@ -79,25 +98,3 @@ it("It should POST all the requirement",(done)=>{
 
 
 
-// describe('.....post check...',function(){
-
-//     it('it post generate otp',function(done){
-//         .post('/api/v16.17.0/otp/generateOTP')
-//         .send({ userName: 'manoj kumar',  email:'manojgum@gmail.com', })
-//         .end((err,response)=>{
-//             expect(res).to.have.status(200);
-//             done();
-//         })
-//     })
-// })
-
-
-
-// var agent = chai.request.agent()
-// agent
-//   .post('/api/v16.17.0/otp/generateOTP')
-//   .send({ username: 'me', password: '123' })
-//   .then(function (res) {
-//     expect(res).to.have.cookie('sessionid');
-//          expect(res).to.have.status(200);
-//   });
