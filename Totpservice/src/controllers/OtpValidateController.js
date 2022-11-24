@@ -58,7 +58,7 @@ router.post("/",Authenticate, async (req,res,next)=>{
 
             const user={
                 "trackId":trackId,
-                "Email":email,
+                "email":email,
                 "message":"successfully Login"
             }
             res.cookie("jwttoken","")

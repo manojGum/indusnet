@@ -32,27 +32,7 @@ describe('POST /api/v16.17.0/otp/OtpValidate',()=>{
         });
     });
 
-// it("It should POST all the requirement",(done)=>{
 
-//         chai.request(server)
-//         .post("/api/v16.17.0/otp/generateOTP")
-//         .type('form')
-//         .send({
-//             userName:"manoj kumar",
-//             email:"manojgum@gmail.com",
-//         })
-//         .end((err,response)=>{
-//             response.should.have.status(200)
-//             response.body.should.be.a(`object`)
-//             response.body.should.have.property('Email').eq(email);
-//             response.body.should.have.property('token');
-//             response.body.should.have.property('success').eq(true);
-//             response.body.should.have.property('message').eq("OTP  successfully  send in your Email, it will expire in 5 minutes");
-//             response.body.should.have.property('otp');
-//             response.body.should.have.property("timestamp")
-//             done()
-//         });
-//     });
 
 it("It should NOT POST a new task without the Token",(done)=>{
     chai.request(server)
@@ -78,7 +58,7 @@ it("When jwttoken undefined then ",(done)=>{
     .send({
         userName:"manoj kumar",
         email:"manojgum@gmail.com",
-        jwttoken:undefined
+        jwttoken:"undefined"
     
     })
     .end((err,response)=>{
@@ -96,7 +76,7 @@ it("When jwttoken undefined then ",(done)=>{
         .type('form')
         .send({
             userName:"manoj kumar",
-            jwttoken:"1235dfds jflksjd flksj afj",
+            token:"1235dfdsjflksjdflksjafj.123654712365",
         })
         .end((err,response)=>{
             response.should.have.status(400)
@@ -137,6 +117,22 @@ it("When jwttoken undefined then ",(done)=>{
     });
 
 
+    it(" It should be all viled properly avilable  ",(done)=>{
+        chai.request(server)
+        .post("/api/v16.17.0/otp/OtpValidate")
+        .type('form')
+        .send({
+            email:"manojgum@gmail.com",
+            jwttoken:"1235dfdsjflksjdflksjafj",
+            otp:"123456"
+        })
+        .end((err,response)=>{
+            response.should.have.status(400)
+            response.body.should.be.a(`object`)
+            response.body.should.have.property("message").eq("successfully Login")
+            done()
+        });
+    });
 
 
 });
