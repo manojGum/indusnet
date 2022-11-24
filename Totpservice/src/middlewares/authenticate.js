@@ -11,9 +11,9 @@ const authenticate= async(req,res,next)=>{
         const timestamp=new Date()
         if(jwttoken==="")
         return res.status(400).send({trackId,message:"one-time password incorrect or already uesed it "});
-        if(req.cookies.jwttoken===undefined)
+        if(jwttoken===undefined)
         return res.status(400).send({trackId,message:"Authorization token not found or incorrect"});
-        if(!req.cookies.jwttoken)
+        if(!jwttoken)
         return res.status(400).send({trackId,message:"Authorization token not found or incorrect"});
 
    
