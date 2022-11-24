@@ -101,7 +101,7 @@ router.post("/",loginAccountLimiter, async (req,res,next)=>{
             "otp":otp
             
         }
-        return res.status(201).send(details)
+        return res.status(200).send(details)
         // return res.status(201).send({user,token,message:"OTP  successfully  send in your Email, it will expire in 5 minutes"})
     }catch(err){
     const  trackId=Math.floor(new Date())
