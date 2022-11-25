@@ -106,10 +106,6 @@ it("It should POST all the requirement",(done)=>{
 
 
 
-
-
-// otpValidation
-
 })
 
 

@@ -98,6 +98,22 @@ it("When jwttoken undefined then ",(done)=>{
             done()
         });
     });
+    it("Otp less then 6 digits ",(done)=>{
+        chai.request(server)
+        .post("/api/v16.17.0/otp/OtpValidate")
+        .auth('jwttoken')
+        .type('form')
+        .send({
+            email:"manojgum@gmail.com",
+            jwttoken:"be4a2e429c5f14cd1b4f77818f9649f3a74f70be23bf2539d3a61a63f97c2fd8.1669353306765",
+            otp:"12345"
+        })
+        .end((err,response)=>{
+            response.should.have.status(400)
+            response.should.have.property("message").eq("Enter 6 digit verification code")
+            done()
+        });
+    });
 
 
     it(" Email not proper  ",(done)=>{
@@ -117,17 +133,20 @@ it("When jwttoken undefined then ",(done)=>{
     });
 
 
-    it(" It should be all viled properly avilable  ",(done)=>{
+    it(" It should be all viled property avilable  ",(done)=>{
         chai.request(server)
         .post("/api/v16.17.0/otp/OtpValidate")
         .type('form')
+        .auth('jwttoken')
         .send({
             email:"manojgum@gmail.com",
-            jwttoken:"1235dfdsjflksjdflksjafj",
-            otp:"123456"
+            jwttoken:"be4a2e429c5f14cd1b4f77818f9649f3a74f70be23bf2539d3a61a63f97c2fd8.1669353306765",
+            otp:"123456",
+            token:"1235dfdsjflksjdflksjafj.1254568545898"
+           
         })
         .end((err,response)=>{
-            response.should.have.status(400)
+            response.should.have.status(200)
             response.body.should.be.a(`object`)
             response.body.should.have.property("message").eq("successfully Login")
             done()

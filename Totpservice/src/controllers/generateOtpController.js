@@ -1,4 +1,6 @@
 const express = require('express');
+var path = require('path');
+var fs = require('fs');
 const Generate = require("../models/generateOtpModel");
 const Isemail = require('isemail');
 const router = express.Router();
@@ -32,12 +34,12 @@ router.post("/",loginAccountLimiter, async (req,res,next)=>{
     const timestamp=new Date(),
      email = (user.email || '').trim()
     if (email.length===0) {
-        return res.status(401).send({trackId,statusCode:400,timestamp,message:'Email not provided'})
+        return res.status(401).send({trackId,statusCode:400,timestamp,message:'Email not provided',path:__filename})
         // throw new Error("Email i salready taken")
         }
     const valid= Isemail.validate(email)
     if(!valid){
-        return res.status(400).send({trackId,statusCode:400,timestamp,message:"Enter valid Email"})
+        return res.status(400).send({trackId,statusCode:400,timestamp,message:"Enter valid Email",path:__filename})
     }
     try{
 
@@ -100,12 +102,13 @@ router.post("/",loginAccountLimiter, async (req,res,next)=>{
             "message":"OTP  successfully  send in your Email, it will expire in 5 minutes",
             "otp":otp
             
-        }
-        return res.status(200).send(details)
+        };
+       
+        return res.status(200).json(details)
         // return res.status(201).send({user,token,message:"OTP  successfully  send in your Email, it will expire in 5 minutes"})
     }catch(err){
     const  trackId=Math.floor(new Date())
-        return res.status(500).send({trackId,statusCode:500,timestamp,message:err.message})
+        return res.status(500).send({trackId,statusCode:500,timestamp,message:err.message,path:__filename})
     }
 })
 
