@@ -3,7 +3,7 @@ const connect=require("./configs/db")
 const dotenv = require('dotenv').config()
 const port = process.env.PORT || 6000 
 
-
+// server
 module.exports= app.listen(port,async function(){
    try{
        
