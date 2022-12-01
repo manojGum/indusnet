@@ -7,8 +7,6 @@ var assert=chai.assert;
 var expect = chai.expect;
 chai.use(chaiHttp)
 
-
-
 describe('.....Aspect check...',function(){
     let userName="manoj kumar";
     let email="manojgum@gmail.com";

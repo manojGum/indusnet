@@ -2,7 +2,7 @@ const express = require('express')
 
 // const OtpValidate = require('../models/OtpValidateModel');
 const router=express.Router();
-const crypto       = require("crypto");
+const crypto= require("crypto");
 const Isemail = require('isemail');
 require('dotenv').config()
 const Authenticate = require("../middlewares/authenticate")
