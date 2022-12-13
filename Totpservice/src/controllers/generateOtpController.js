@@ -34,7 +34,7 @@ const createNewOTP=async(email)=>{
     return { token,otp};
 }
 
-
+//http://localhost:8000/api/v1.0.0/otp/generateOTP
 
 router.post("/",loginAccountLimiter, async (req,res,next)=>{
 
@@ -68,7 +68,7 @@ router.post("/",loginAccountLimiter, async (req,res,next)=>{
             text: `Hello sir/madam your otp is ${otp}`, // plain text body
             html: `<b>Hello sir/madam your otp is ${otp}</b>`, // html body
         });
-        return res.status(201).send({message: "OTP  successfully  send in your Email, it will expire in 1 minutes "})
+        return res.status(201).send({message: `We have successfully send OTP in your register email_ID - ${email}, it will expire in 1 minutes `})
      
     }catch(err){
         return res.status(500).send({trackId,statusCode:500,timestamp,message:err.message,path:__filename})
