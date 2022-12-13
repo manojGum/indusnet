@@ -15,6 +15,7 @@ app.use(cors())
 app.use(BodyParser.json());
 app.use(cookieParser());
 app.use(BodyParser.urlencoded({extended:true}))
+// Routes
 app.use(`${api}/generateOTP`,generateOTPController);
 app.use(`${api}/OtpValidate`,OtpValidateController);
 
