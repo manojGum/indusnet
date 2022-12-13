@@ -62,7 +62,7 @@ router.post("/",loginAccountLimiter, async (req,res,next)=>{
 
         // Email sends to the user 
         transporter.sendMail({
-            from: '"Manojkumar Admin 👻" <admin@gmail.com>', // sender address
+            from: '"Admin 👻" <admin@gmail.com>', // sender address
             to: user.email, // list of receivers
             subject: "your Otp is successfully send ✔ ", // Subject line
             text: `Hello sir/madam your otp is ${otp}`, // plain text body

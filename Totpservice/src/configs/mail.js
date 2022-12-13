@@ -1,4 +1,5 @@
 const nodemailer = require("nodemailer");
+require('dotenv').config()
 
 // mail configration 
 // let transporter = nodemailer.createTransport({
@@ -16,7 +17,8 @@ module.exports= nodemailer.createTransport({
     service: "gmail",
     secure: false, // true for 465, false for other ports
     auth: {
-      user: "manojgum@gmail.com", // generated ethereal user
-      pass: "lnrsvfdmvgovyjyg", // generated ethereal password
+      user: process.env.em, // generated ethereal user
+      pass: process.env.pss, // generated ethereal password
     },
   });
+  process.env.ApI_URL
