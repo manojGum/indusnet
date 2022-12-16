@@ -26,7 +26,7 @@ function verifyOTP(email,token,otp){
 }
 
 
-const otpValidate= async (req,res,next)=>{
+router.post("/",Authenticate, async (req,res,next)=>{
 
 
     const  trackId=Math.floor(new Date())
@@ -67,8 +67,10 @@ const otpValidate= async (req,res,next)=>{
     }catch(err){
         return res.status(500).send(err.message)
     }
-}
+})
 
 
 
-module.exports=otpValidate
+
+
+module.exports=router

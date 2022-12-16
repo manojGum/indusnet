@@ -8,6 +8,7 @@ const transporter = require("../configs/mail")
 // const otpGenerator = require("otp-generator");
 const crypto  = require("crypto");
 require('dotenv').config()
+const loginAccountLimiter=require("../middlewares/loginAccountLimiter")
 
 // Generate a 6 digit numeric OTP
  function generateOTP() {
@@ -35,7 +36,7 @@ const createNewOTP=async(email)=>{
 
 //http://localhost:8000/api/v1.0.0/otp/generateOTP
 
-const generateotpcont=async (req,res,next)=>{
+router.post("/",loginAccountLimiter, async (req,res,next)=>{
 
     // request user details
     let user = await req.body
@@ -72,6 +73,6 @@ const generateotpcont=async (req,res,next)=>{
     }catch(err){
         return res.status(500).send({trackId,statusCode:500,timestamp,message:err.message,path:__filename})
     }
-}
+})
 
-module.exports=generateotpcont
+module.exports=router

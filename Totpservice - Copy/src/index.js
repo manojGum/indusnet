@@ -5,8 +5,8 @@ const cookieParser = require('cookie-parser')
 require('dotenv').config();
 const api=process.env.ApI_URL
 // Controller 
-const generateOTP=require("./routers/generateOtp")
-const OtpValidate= require("./routers/otpValidate")
+const generateOTPController=require("./controllers/generateOtpController")
+const OtpValidateController= require("./controllers/OtpValidateController")
 
 const app=express();
 // Middleware
@@ -16,8 +16,8 @@ app.use(BodyParser.json());
 app.use(cookieParser());
 app.use(BodyParser.urlencoded({extended:true}))
 // Routes
-app.use(`${api}/generateOTP`,generateOTP);
-app.use(`${api}/OtpValidate`,OtpValidate);
+app.use(`${api}/generateOTP`,generateOTPController);
+app.use(`${api}/OtpValidate`,OtpValidateController);
 
 
 
