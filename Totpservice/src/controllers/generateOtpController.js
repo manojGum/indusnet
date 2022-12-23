@@ -20,7 +20,6 @@ require('dotenv').config()
     }
 
 
-
 const createNewOTP=async(email)=>{
    
       
