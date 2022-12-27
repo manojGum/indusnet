@@ -1,12 +1,13 @@
 const express = require("express");
 
-// const OtpValidate = require('../models/OtpValidateModel');
 const router = express.Router();
 
 const Authenticate = require("../middlewares/authenticate");
 
-const otpValidate = require("../controllers/OtpValidateController");
+const OtpValidateController = require("../controllers/otpValidateController");
 
-router.post("/", Authenticate, otpValidate);
+// With the help of this Api  or Router , We validate the user and Whatever the OTP  entered user
+
+router.post("/", Authenticate, OtpValidateController);
 
 module.exports = router;
