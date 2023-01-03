@@ -32,8 +32,8 @@ const generateOtpController = async (req, res, next) => {
   // request user details
   let user = await req.body; // get username and email id  from body
   const trackId = Math.floor(new Date()); // Generate trackId used of current date and time 
-  const timestamp = new Date(),
-    email = (user.email || "").trim(); // remove unwanted space between user email Id
+  const timestamp = new Date() ;
+  const   email = (user.email || "").trim(); // remove unwanted space between user email Id
   if (email.length === 0) {
     // check email length is equal to zero then through an error email not provided
     return res.status(401).send({
