@@ -1,4 +1,3 @@
-// const OtpValidate = require('../models/OtpValidateModel');
 const crypto = require("crypto");
 const Isemail = require("isemail");
 require("dotenv").config();

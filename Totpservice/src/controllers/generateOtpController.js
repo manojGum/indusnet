@@ -6,7 +6,7 @@ require("dotenv").config();
 
 // Generate a random  6 digit numeric OTP
 function generateOtp() {
-  var digits = "0123456789";
+  const digits = "0123456789";
   let OTP = "";
   for (let i = 0; i < 6; i++) {
     OTP += digits[Math.floor(Math.random() * 10)];
@@ -15,7 +15,7 @@ function generateOtp() {
 }
 
 const createNewOtp = async (email) => {
-  const otp = await generateOtp();
+  const otp = generateOtp();
   const ttl = 5 * (60 * 1000);
   const expires = Date.now() + ttl;
   // Calculate new hash with the help of   key , data and  the  algorithm
@@ -31,9 +31,9 @@ const createNewOtp = async (email) => {
 const generateOtpController = async (req, res, next) => {
   // request user details
   let user = await req.body; // get username and email id  from body
-  const trackId = Math.floor(new Date()); // Generate trackId used of current date and time 
-  const timestamp = new Date() ;
-  const   email = (user.email || "").trim(); // remove unwanted space between user email Id
+  const trackId = Math.floor(new Date()); // Generate trackId used of current date and time
+  const timestamp = new Date();
+  const email = (user.email || "").trim(); // remove unwanted space between user email Id
   if (email.length === 0) {
     // check email length is equal to zero then through an error email not provided
     return res.status(401).send({
@@ -69,7 +69,7 @@ const generateOtpController = async (req, res, next) => {
       from: '"Admin 👻" <admin@gmail.com>', // sender address
       to: user.email, // list of receivers
       subject: "your Otp is successfully send ✔ ", // Subject line that is send to the user
-      text: `Hello sir/madam your otp is ${otp}`, // plain text body message 
+      text: `Hello sir/madam your otp is ${otp}`, // plain text body message
       html: `<b>Hello sir/madam your otp is ${otp}</b>`, // html body message to send user
     });
     return res.status(201).send({
