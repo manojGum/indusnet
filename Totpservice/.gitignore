@@ -115,3 +115,5 @@ build
 .strapi-updater.json
 .demo_otpgeneration.js
 .env
+/math.js
+tests/math.test.js
